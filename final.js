@@ -41,30 +41,30 @@ module.exports.startDB = function()
 }
 
 module.exports.registerUser = function(userData){
-    return new Promise((resolve, reject)=> {
+    return new Promise((res, rej)=> {
     if(userData.password === "" || userData.email === "" ){
-        reject("Error: email or password cannot be empty or only white spaces! ");
+        rej("Error: email or password cannot be empty or only white spaces! ");
   
     }
   
-    bcrypt.genSalt(10, function(err, salt) { // Generate a "salt" using 10 rounds
-        bcrypt.hash(userData.password, salt, function(err, hashValue) { // encrypt the password: "myPassword123"
+    bcrypt.genSalt(10, function(err, salt) { 
+        bcrypt.hash(userData.password, salt, function(err, hashValue) {
            if(err){
-            reject("There was an error encrypting the password");   
+            rej("There was an error encrypting the password");   
            }else{
             userData.password = hashValue;
   
-            let newUser = new  User(userData);
+            let newUser = new  a(userData);
    
     newUser.save((err) => {
         if(err && err.code == 11000) {
-          reject("user’s email) already taken");
+          rej("user’s email) already taken");
         } else if(err && err.code != 11000) {
-          reject("Error: cannot create the user. "+err);
+          rej("Error: cannot create the user. "+err);
         }
         else{
-            console.log("Working"); //delete
-            resolve();
+            console.log("Working"); 
+            res();
         }
       
       });
@@ -78,30 +78,30 @@ module.exports.registerUser = function(userData){
   }
 
   module.exports.registerUser = function(userData){
-    return new Promise((resolve, reject)=> {
+    return new Promise((res, rej)=> {
     if(userData.password === "" || userData.email === "" ){
-        reject("Error: email or password cannot be empty or only white spaces! ");
+        rej("Error: email or password cannot be empty or only white spaces! ");
   
     }
   
-    bcrypt.genSalt(10, function(err, salt) { // Generate a "salt" using 10 rounds
-        bcrypt.hash(userData.password, salt, function(err, hashValue) { // encrypt the password: "myPassword123"
+    bcrypt.genSalt(10, function(err, salt) { 
+        bcrypt.hash(userData.password, salt, function(err, hashValue) { 
            if(err){
-            reject("There was an error encrypting the password");   
+            rej("There was an error encrypting the password");   
            }else{
             userData.password = hashValue;
   
-            let newUser = new  User(userData);
+            let newUser = new  a(userData);
    
     newUser.save((err) => {
         if(err && err.code == 11000) {
-          reject("user’s email) already taken");
+          rej("user’s email) already taken");
         } else if(err && err.code != 11000) {
-          reject("Error: cannot create the user. "+err);
+          rej("Error: cannot create the user. "+err);
         }
         else{
-            console.log("Working"); //delete
-            resolve();
+            console.log("Working"); 
+            res();
         }
       
       });
